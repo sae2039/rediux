@@ -4,9 +4,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #3c0080;
+  background-color: #26735d;
   color: white;
-  padding: 0 10%;
+  padding: 0;
 }
 
 .header ul {
