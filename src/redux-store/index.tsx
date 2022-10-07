@@ -1,28 +1,27 @@
-import { createStore } from "redux";
-import { ActionType } from "../store/types/actionType";
-import { counterReducerType, stateType } from "../store/types/store.type";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
+
+import { stateType } from "../store/types/store.type";
 
 const initialState = { counter: 0 };
-const reducer = (
-  state: stateType = initialState,
-  action: counterReducerType
-) => {
-  switch (action.type) {
-    case ActionType.INC:
-      return {
-        counter: state.counter + action.payload,
-      };
-    case ActionType.DEC:
-      return {
-        counter: state.counter - (state.counter * action.payload) / 100,
-      };
-    case ActionType.RES:
-      return {
-        counter: 0,
-      };
-  }
-  return state;
-};
 
-const store = createStore(reducer);
+const counterSlice = createSlice({
+  name: "counter",
+  initialState,
+  reducers: {
+    increment(state: stateType, action) {
+      state.counter = state.counter + action.payload;
+    },
+    decrement(state: stateType, action) {
+      state.counter = state.counter - action.payload;
+    },
+    reset(state: stateType) {
+      state.counter = 0;
+    },
+  },
+});
+
+const store = configureStore({
+  reducer: counterSlice.reducer, // OR for many reducers //reducer: { counter: counterSlice.reducer },
+});
+export const counterActions = counterSlice.actions; // counterSlice.action return an action object of this shape : {type: 'some auto-generate und uniq}
 export default store;

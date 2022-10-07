@@ -11,4 +11,5 @@ interface restetType {
 export interface stateType {
   counter: number;
 }
+
 export type counterReducerType = actionType | restetType;
