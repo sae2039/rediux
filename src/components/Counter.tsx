@@ -1,15 +1,14 @@
 import classes from "./Counter.module.css";
-import { counterActions } from "../redux-store";
-import { useSelector, useDispatch } from "react-redux";
+import { counterActions } from "../redux-store/counter-slice";
 import { useAppDispatch, useAppSelector } from "../redux-store/types/HooksType";
 
 const Counter = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const incCounterHandler = () => {
     dispatch(counterActions.increment(15));
   };
   const decCounterHandler = () => {
-    dispatch(counterActions.decrement(10));
+    dispatch(counterActions.decrement(5));
   };
   const counter = useAppSelector((state) => state.counter.counter); // select der Teil von Daten in Store, die wir brauchen und gleichzeitig macht ein Subscribtion
 
