@@ -1,4 +1,4 @@
-import { createSlice, configureStore } from "@reduxjs/toolkit";
+import { createSlice, configureStore, Store } from "@reduxjs/toolkit";
 
 import { stateType } from "../store/types/store.type";
 
@@ -19,9 +19,27 @@ const counterSlice = createSlice({
     },
   },
 });
+const initialAuthState = {
+  isAuthenticated: false,
+};
+const authSlice = createSlice({
+  name: "auth",
+  initialState: initialAuthState,
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
 
 const store = configureStore({
-  reducer: counterSlice.reducer, // OR for many reducers //reducer: { counter: counterSlice.reducer },
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer }, // OR for many reducers //reducer: { counter: counterSlice.reducer },
 });
+export type RootState = ReturnType<typeof store.getState>;
+export type appDispatch = typeof store.dispatch;
 export const counterActions = counterSlice.actions; // counterSlice.action return an action object of this shape : {type: 'some auto-generate und uniq}
+export const authActions = authSlice.actions;
 export default store;
