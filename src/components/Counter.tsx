@@ -1,8 +1,8 @@
 import classes from "./Counter.module.css";
 import { counterActions } from "../redux-store";
 import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../redux-store/types/HooksType";
 
-import { stateType } from "../store/types/store.type";
 const Counter = () => {
   const dispatch = useDispatch();
   const incCounterHandler = () => {
@@ -11,7 +11,7 @@ const Counter = () => {
   const decCounterHandler = () => {
     dispatch(counterActions.decrement(10));
   };
-  const counter = useSelector((state: stateType) => state.counter); // select der Teil von Daten in Store, die wir brauchen und gleichzeitig macht ein Subscribtion
+  const counter = useAppSelector((state) => state.counter.counter); // select der Teil von Daten in Store, die wir brauchen und gleichzeitig macht ein Subscribtion
 
   return (
     <main className={classes.counter}>
