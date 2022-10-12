@@ -1,9 +1,42 @@
 import classes from "./CartItem.module.css";
+import { useAppDispatch } from "../redux-store/product-hook";
+import { cartAction } from "../redux-store/cart-slice";
+import { ProductItemProps } from "../Shop/ProductItem";
+import { title } from "process";
 interface CartItemInterface {
-  item: { title: string; quantity: number; total: number; price: number };
+  key: number;
+  id: number;
+  title: string;
+  quantity: number;
+  total: number;
+  price: number;
+  description: string;
 }
-const CartItem = (props: CartItemInterface) => {
-  const { title, quantity, total, price } = props.item;
+type cartItem = {
+  item: ProductItemProps;
+  total: number;
+};
+const CartItem = ({
+  key,
+  id,
+  title,
+  price,
+  description,
+  quantity,
+  total,
+}: CartItemInterface) => {
+  const dispatch = useAppDispatch();
+  const add = () => {
+    dispatch(
+      cartAction.addItemToCart({ id, title, price, description, quantity })
+    );
+  };
+  const minus = () => {
+    dispatch(
+      cartAction.removeItem({ id, title, price, description, quantity })
+    );
+  };
+  //const { title, quantity, total, price } = props.item;
 
   return (
     <li className={classes.item}>
@@ -19,8 +52,8 @@ const CartItem = (props: CartItemInterface) => {
           x <span>{quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button>-</button>
-          <button>+</button>
+          <button onClick={minus}>-</button>
+          <button onClick={add}>+</button>
         </div>
       </div>
     </li>

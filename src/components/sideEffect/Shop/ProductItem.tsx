@@ -3,17 +3,25 @@ import classes from "./ProductItem.module.css";
 import { cartAction } from "../redux-store/cart-slice";
 import { useAppDispatch } from "../redux-store/product-hook/index";
 
-interface ProductItemProps {
+export interface ProductItemProps {
   id: number;
   title: string;
   price: number;
   description: string;
+  quantity: number;
 }
-const ProductItem = ({ id, title, price, description }: ProductItemProps) => {
+const ProductItem = ({
+  id,
+  title,
+  price,
+  description,
+  quantity,
+}: ProductItemProps) => {
   const dispatch = useAppDispatch();
   const addItem = () => {
-    console.log({ id, title, price, description });
-    dispatch(cartAction.addItemToCart({ id, title, price, description }));
+    dispatch(
+      cartAction.addItemToCart({ id, title, price, description, quantity })
+    );
   };
   return (
     <li className={classes.item}>

@@ -5,20 +5,23 @@ export type ProductType = {
   title: string;
   price: number;
   description: string;
+  quantity: number;
 };
 
 const productInitialState = [
   {
     id: 1,
     title: "Test",
-    price: 6,
+    price: 12,
     description: "This is a first product - amazing!",
+    quantity: 0,
   },
   {
     id: 2,
     title: "Test",
     price: 6,
     description: "This is a first product - amazing!",
+    quantity: 0,
   },
 ];
 
