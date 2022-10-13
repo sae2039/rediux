@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stat } from "fs";
-
 import { ProductType } from "./products-slice";
-
 interface cart {
   items: ProductType[];
   totalQuentity: number;
